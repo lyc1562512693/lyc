@@ -1,1 +1,112 @@
-<mxfile host="app.diagrams.net" modified="2021-12-24T01:47:41.967Z" agent="5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36" version="15.9.6" etag="Z-zGwQDeN296PfIxmlMM" type="github"><diagram id="JN2_pItNV24SpoNBIPrJ">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-12-27T13:47:09.926Z" agent="5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36" etag="PQwUrV6YqPD8WVTEnM2o" version="15.9.6" type="github">
+  <diagram id="JN2_pItNV24SpoNBIPrJ" name="Page-1">
+    <mxGraphModel dx="1422" dy="738" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="aMujuEgv8EanMiD9TAE2-5" value="AlertAssociateState" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="110" y="200" width="140" height="166" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-6" value="alert_time" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="aMujuEgv8EanMiD9TAE2-5">
+          <mxGeometry y="26" width="140" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-7" value="startTime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="aMujuEgv8EanMiD9TAE2-5">
+          <mxGeometry y="52" width="140" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-9" value="endTime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="aMujuEgv8EanMiD9TAE2-5">
+          <mxGeometry y="78" width="140" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-15" value="AssociateStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="aMujuEgv8EanMiD9TAE2-5">
+          <mxGeometry y="100" width="140" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-32" value="protocols" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="aMujuEgv8EanMiD9TAE2-5">
+          <mxGeometry y="122" width="140" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-8" value="NeedAssociateProtocols" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="aMujuEgv8EanMiD9TAE2-5">
+          <mxGeometry y="144" width="140" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-16" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="240" as="sourcePoint" />
+            <mxPoint x="320" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-17" value="原始告警时间" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="318" y="230" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-19" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="264" as="sourcePoint" />
+            <mxPoint x="320" y="264" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-20" value="上下文关联日志左时间" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="315" y="253" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-22" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="290" as="sourcePoint" />
+            <mxPoint x="320" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-23" value="上下文关联日志右时间" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="315" y="280" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-26" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="310" as="sourcePoint" />
+            <mxPoint x="320" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-27" value="关联策略" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="321" y="300" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-30" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="334" as="sourcePoint" />
+            <mxPoint x="320" y="334" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-31" value="总的关联日志协议类型集合" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="319" y="324" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-37" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="354" as="sourcePoint" />
+            <mxPoint x="320" y="354" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-38" value="未关联日志协议类型集合" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="319" y="344" width="150" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-41" value="AlertDetail" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontFamily=Helvetica;fontSize=12;fontColor=default;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="200" width="140" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-42" value="AlertAssociateState" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;fontColor=default;html=1;" vertex="1" parent="aMujuEgv8EanMiD9TAE2-41">
+          <mxGeometry y="26" width="140" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-43" value="Alert" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;fontColor=default;html=1;" vertex="1" parent="aMujuEgv8EanMiD9TAE2-41">
+          <mxGeometry y="52" width="140" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-46" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="630" y="239" as="sourcePoint" />
+            <mxPoint x="690" y="239" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-47" value="告警状态" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="691" y="229" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-48" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="630" y="263" as="sourcePoint" />
+            <mxPoint x="690" y="263" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aMujuEgv8EanMiD9TAE2-49" value="告警详情" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="691" y="253" width="60" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
