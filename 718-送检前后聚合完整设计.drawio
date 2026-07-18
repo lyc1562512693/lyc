@@ -1,0 +1,375 @@
+<mxfile host="app.diagrams.net" pages="4">
+  <diagram id="pg1" name="1-总体方案图">
+    <mxGraphModel dx="2970" dy="1453" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0" adaptiveColors="auto">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bgmod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;dashed=1;verticalAlign=top;align=left;spacingLeft=10;fontStyle=1;fontColor=#666666;fontSize=14;" value="x送检构图模块(本次负责)" vertex="1">
+          <mxGeometry height="1000" width="820" x="160" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="bgpre" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d79b00;dashed=1;verticalAlign=top;fontStyle=1;fontColor=#d79b00;fontSize=14;" value="后置聚合(送检 GPT 前)" vertex="1">
+          <mxGeometry height="390" width="520" x="180" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="bgpost" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0066cc;dashed=1;verticalAlign=top;fontStyle=1;fontColor=#0066cc;fontSize=14;" value="送检后聚合(研判结论后)" vertex="1">
+          <mxGeometry height="360" width="520" x="180" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="t1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="安全日志 / 遥测日志" vertex="1">
+          <mxGeometry height="50" width="300" x="290" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="t2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="① 预处理模块:过滤业务日志 + ★前置聚合(分钟级折叠,非本次范围)&lt;br&gt;规则=「构图前置聚合策略」子表;边写入 Cassandra" vertex="1">
+          <mxGeometry height="60" width="400" x="240" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="t3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="② x 关联模块:实体关联 / 多边关联,触发送检" vertex="1">
+          <mxGeometry height="60" width="400" x="240" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="t4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="③ 取送检数据:当前边 + 关联边(关联表) + 历史边(骨架)" vertex="1">
+          <mxGeometry height="60" width="400" x="240" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#f5f5f5;strokeColor=#999999;fontColor=#666666;" value="重复送检边冷却接口(预留 · 本期空实现,默认放行)" vertex="1">
+          <mxGeometry height="50" width="400" x="240" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="当前边:不聚合,原样保留" vertex="1">
+          <mxGeometry height="40" width="400" x="240" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="关联边聚合:场景路由(策略表 I 列)&lt;br&gt;+ 基础维度 attackState + gpt_label + gpt_sublabel(配置化)" vertex="1">
+          <mxGeometry height="60" width="400" x="240" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="历史边裁剪 Top100(keyEdge &gt; GPT 严重 &gt; 打分 &gt; 最新时间)" vertex="1">
+          <mxGeometry height="50" width="400" x="240" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="组装送检图:当前边(原样)+ 聚合关联边 + ≤100 历史边" vertex="1">
+          <mxGeometry height="50" width="400" x="240" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="cut" parent="1" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#f5f5f5;strokeColor=#999999;fontColor=#666666;" value="送检前二次字段裁剪&lt;br&gt;(虚框预留,本期不做)" vertex="1">
+          <mxGeometry height="60" width="210" x="750" y="715" as="geometry" />
+        </mxCell>
+        <mxCell id="t5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="④ GPT 模型研判&lt;br&gt;输出:gpt_label / gpt_sublabel(成功/失败/失陷/误报/未知)&lt;br&gt;+ keyEdge 重要边标记 + 主机打标" vertex="1">
+          <mxGeometry height="70" width="400" x="240" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="q1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0066cc;" value="更新研判结论 + keyEdge&lt;br&gt;(结论翻转 → 旧支撑边 keyEdge 置 false,不搬桶)" vertex="1">
+          <mxGeometry height="60" width="400" x="240" y="970" as="geometry" />
+        </mxCell>
+        <mxCell id="retrig" parent="1" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#f5f5f5;strokeColor=#999999;fontColor=#666666;" value="结论变更重触发送检&lt;br&gt;(虚框预留,第一版不做)" vertex="1">
+          <mxGeometry height="60" width="210" x="750" y="970" as="geometry" />
+        </mxCell>
+        <mxCell id="q2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0066cc;" value="统一 Key 分桶:&lt;br&gt;tenantId : direction : ipStrategy : gpt_label : alertRuleId : keyEdge" vertex="1">
+          <mxGeometry height="60" width="400" x="240" y="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="q3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0066cc;" value="字段合并(算子表)+ 剥离数据包原文" vertex="1">
+          <mxGeometry height="50" width="400" x="240" y="1130" as="geometry" />
+        </mxCell>
+        <mxCell id="q4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0066cc;" value="写回图骨架(内存 · 标脏)" vertex="1">
+          <mxGeometry height="50" width="400" x="240" y="1210" as="geometry" />
+        </mxCell>
+        <mxCell id="t6" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="图骨架:内存(TTL 7 天) ⇄ 定时批量同步 ⇄ Cassandra 持久化" vertex="1">
+          <mxGeometry height="80" width="400" x="240" y="1330" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="t1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="t2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="t2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="t3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="t3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="t4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="t4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="p1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="p1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="p2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="p2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="p3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="p3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="p4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="p4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="p5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="p5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;strokeColor=#999999;" target="cut">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="p5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="t5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="t5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="q1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="q1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;strokeColor=#999999;" target="retrig">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="q1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="q2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="q2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="q3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="q3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="q4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="q4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="t6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="t6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#82b366;fontColor=#82b366;" target="t4" value="下次送检:读历史边">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="110" y="1370" />
+              <mxPoint x="110" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pg2" name="2-后置聚合流程(送检GPT前)">
+    <mxGraphModel dx="1697" dy="879" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1200" math="0" shadow="0" adaptiveColors="auto">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="s0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="送检触发:当前边 + 关联边 + 历史边" vertex="1">
+          <mxGeometry height="50" width="340" x="430" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="d0" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="冷却接口 ShouldSuppress?&lt;br&gt;(本期空实现,恒否)" vertex="1">
+          <mxGeometry height="90" width="220" x="490" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#f5f5f5;strokeColor=#999999;fontColor=#666666;" value="遏制 / 降频(本期不触发)" vertex="1">
+          <mxGeometry height="50" width="200" x="830" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="sp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="三类边分治" vertex="1">
+          <mxGeometry height="40" width="260" x="470" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="当前边:不聚合&lt;br&gt;原样保留" vertex="1">
+          <mxGeometry height="60" width="220" x="60" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="关联边:场景路由&lt;br&gt;threatClass / threatType / threatSubType + 方向&lt;br&gt;(子类精确 &gt; 小类 &gt; 大类)" vertex="1">
+          <mxGeometry height="70" width="340" x="380" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="历史边:取当前资产全部历史边(骨架内存,≤7 天)" vertex="1">
+          <mxGeometry height="70" width="260" x="850" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="送检前聚合策略&lt;br&gt;形态?" vertex="1">
+          <mxGeometry height="80" width="180" x="460" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="按表内字段拼 Key&lt;br&gt;(区分方向取字段组)" vertex="1">
+          <mxGeometry height="60" width="180" x="240" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="回落「构图前置聚合策略」子表聚合字段&lt;br&gt;(预处理前置聚合规则)" vertex="1">
+          <mxGeometry height="60" width="200" x="450" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="不聚合 / 无策略:&lt;br&gt;原样保留" vertex="1">
+          <mxGeometry height="60" width="150" x="680" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="m5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="叠加基础维度:attackState + gpt_label + gpt_sublabel&lt;br&gt;(维度构成配置化;结论缺失取 unknown)" vertex="1">
+          <mxGeometry height="60" width="380" x="360" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="m6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="规则 ID 取值:reqRuleId → respRuleId → norule" vertex="1">
+          <mxGeometry height="50" width="380" x="360" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="m7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="同 Key 字段合并 → 聚合关联边&lt;br&gt;(isAggr=true;logCount 累加;集合上限 100;logIds 溯源)" vertex="1">
+          <mxGeometry height="60" width="380" x="360" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="h2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="多级排序:keyEdge &gt; GPT 结论严重度 &gt; confidence/severity/riskLevel &gt; 最新时间" vertex="1">
+          <mxGeometry height="80" width="260" x="850" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="h3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="取 Top100(上限配置化)&lt;br&gt;被裁边留骨架,仅本次不送检" vertex="1">
+          <mxGeometry height="60" width="260" x="850" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="z1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="组装送检图:当前边 + 聚合关联边 + ≤100 历史边 → 送 GPT 研判" vertex="1">
+          <mxGeometry height="60" width="400" x="400" y="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" edge="1" parent="1" source="s0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="d0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" edge="1" parent="1" source="d0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;strokeColor=#999999;" target="e0" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" edge="1" parent="1" source="d0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="sp" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" edge="1" parent="1" source="sp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="c1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f5" edge="1" parent="1" source="sp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="m1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f6" edge="1" parent="1" source="sp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="h1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f7" edge="1" parent="1" source="m1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f8" edge="1" parent="1" source="d1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="m2" value="显式字段组合">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f9" edge="1" parent="1" source="d1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="m3" value="前置已聚合,复用">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f10" edge="1" parent="1" source="d1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="m4" value="不聚合 / 无策略">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f11" edge="1" parent="1" source="m2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="m5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f12" edge="1" parent="1" source="m3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="m5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f13" edge="1" parent="1" source="m4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=1;entryY=0.5;" target="z1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f14" edge="1" parent="1" source="m5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="m6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f15" edge="1" parent="1" source="m6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="m7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f16" edge="1" parent="1" source="m7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="z1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f17" edge="1" parent="1" source="h1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="h2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f18" edge="1" parent="1" source="h2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="h3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f19" edge="1" parent="1" source="h3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=1;entryY=0.5;" target="z1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f20" edge="1" parent="1" source="c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" target="z1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pg3" name="3-送检后聚合流程(研判结论后)">
+    <mxGraphModel dx="900" dy="700" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1300" math="0" shadow="0" adaptiveColors="auto">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="g0" value="GPT 返回:逐边 gpt_label / gpt_sublabel / keyEdge + 主机打标" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="380" y="40" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" value="① 更新边研判结论字段;档案更新(Redis · 资产团队接口:上次结论 / 主机打标)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0066cc;" vertex="1" parent="1">
+          <mxGeometry x="380" y="140" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" value="② 结论翻转处理:旧支撑边 keyEdge 置 false&lt;br&gt;(仅改属性,不搬桶,旧桶随 TTL 7 天过期)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0066cc;" vertex="1" parent="1">
+          <mxGeometry x="380" y="240" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rt" value="结论升级重触发送检&lt;br&gt;(虚框预留,第一版不做)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#f5f5f5;strokeColor=#999999;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="850" y="240" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g3" value="③ ipStrategy 选择:方向 × attackState 查 ip-agg 对照表&lt;br&gt;一对一(srcIp+dstIp+dstPort)/ 一对多(dstIp+dstPort)/ 多对一(srcIp)&lt;br&gt;HostNode 永不被聚合" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0066cc;" vertex="1" parent="1">
+          <mxGeometry x="380" y="340" width="380" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="g4" value="④ 生成 postJudgeAggKey =&lt;br&gt;tenantId : direction : ipStrategy : gpt_label : alertRuleId : keyEdge" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0066cc;" vertex="1" parent="1">
+          <mxGeometry x="380" y="460" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nt" value="缺省口径:&lt;br&gt;gpt_label 缺失 → unknown&lt;br&gt;规则:reqRuleId → respRuleId → 映射 alertRuleId → norule&lt;br&gt;维度构成配置化(可加回 gpt_sublabel)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="850" y="440" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="dk" value="keyEdge ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="480" y="560" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" value="重要边桶(… : true)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="250" y="690" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="非重要边桶(… : false)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="650" y="690" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="g5" value="⑤ 同 Key 字段合并(算子表:setUnion 上限 100 / logCount 累加 / 首末时间 / maxPriority)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0066cc;" vertex="1" parent="1">
+          <mxGeometry x="380" y="790" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g6" value="⑥ 剥离数据包原文(requestBody / requestHead / responseBody → drop;logIds 溯源)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0066cc;" vertex="1" parent="1">
+          <mxGeometry x="380" y="890" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g7" value="⑦ 写回内存骨架(标脏;lastJudgeBatchId 幂等)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0066cc;" vertex="1" parent="1">
+          <mxGeometry x="380" y="990" width="380" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="g8" value="定时批量同步 Cassandra(默认 60s,仅脏桶;行 TTL 7 天)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="380" y="1080" width="380" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="k1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="g0" target="g1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="g1" target="g2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;strokeColor=#999999;" edge="1" parent="1" source="g2" target="rt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="g2" target="g3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="g3" target="g4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;strokeColor=#d6b656;" edge="1" parent="1" source="g4" target="nt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="g4" target="dk">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k8" value="true" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="dk" target="b1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k9" value="false" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="dk" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="b1" target="g5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="b2" target="g5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="g5" target="g6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="g6" target="g7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="g7" target="g8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pg4" name="4-骨架存储架构">
+    <mxGraphModel dx="900" dy="700" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" math="0" shadow="0" adaptiveColors="auto">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ma" value="x送检构图模块聚合(后置聚合 + 送检后聚合)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="400" y="50" width="380" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="mb" value="内存骨架缓存&lt;br&gt;map[tenantId:assetId] → Skeleton(按 aggKey 索引压缩边)&lt;br&gt;TTL 7 天过滤 · LRU 水位淘汰 · 脏标记" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="380" y="240" width="420" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="mc" value="Cassandra 骨架表&lt;br&gt;分区键(tenantId, assetId)+ 聚类键 aggKey · 行 TTL 7 天" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=14;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="400" y="480" width="380" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="md" value="Cassandra 既有表&lt;br&gt;原始两点一边(预处理写入)&lt;br&gt;关联表(x 关联写入)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=14;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="60" y="230" width="250" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="me" value="Redis 档案(资产团队管理)&lt;br&gt;上次研判结论 / 误报信息 / 资产属性" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="880" y="240" width="250" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="w1" value="读历史边 / 写压缩边(全部走内存)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="ma" target="mb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w2" value="定时批量同步(默认 60s,仅脏桶,upsert 幂等)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.4;exitY=1;entryX=0.4;entryY=0;" edge="1" parent="1" source="mb" target="mc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w3" value="重启后懒加载恢复" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;strokeColor=#82b366;fontColor=#82b366;exitX=0.7;exitY=0;entryX=0.7;entryY=1;" edge="1" parent="1" source="mc" target="mb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w4" value="送检取数:当前边 + 关联边(只读)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="ma" target="md">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w5" value="结论更新 / 主机打标(接口调用)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="ma" target="me">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
